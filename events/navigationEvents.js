@@ -1,6 +1,8 @@
 import { booksOnSale, getBooks } from '../api/bookData';
 import { signOut } from '../utils/auth';
 import { showBooks } from '../pages/books';
+import { favoriteAuthors, getAuthors } from '../api/authorData';
+import { showAuthors } from '../pages/authors';
 
 // navigation events
 const navigationEvents = () => {
@@ -22,7 +24,11 @@ const navigationEvents = () => {
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
-    console.warn('CLICKED AUTHORS');
+    getAuthors().then(showAuthors);
+  });
+
+  document.querySelector('#favorite-authors').addEventListener('click', () => {
+    favoriteAuthors().then(showAuthors);
   });
 
   // STRETCH: SEARCH
