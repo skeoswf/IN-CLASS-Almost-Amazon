@@ -6,7 +6,7 @@
 const getAuthors = () => {};
 
 // FIXME: CREATE AUTHOR
-const createAuthor = () => {};
+const createAuthor = (payload) => {};
 
 // FIXME: GET SINGLE AUTHOR
 const getSingleAuthor = () => {};
