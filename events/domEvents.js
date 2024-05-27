@@ -8,6 +8,8 @@ import addAuthorForm from '../components/forms/addAuthorForm';
 import addBookForm from '../components/forms/addBookForm';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
+import viewBook from '../pages/viewBook';
+import getBookDetails from '../api/mergedData';
 
 // prettier-ignore
 const domEvents = () => {
@@ -38,6 +40,10 @@ const domEvents = () => {
     }
     // TODO: CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
+      if (e.target.id.includes('view-book-btn')) {
+        const [, firebaseKey] = e.target.id.split('--');
+        getBookDetails(firebaseKey).then(viewBook);
+      }
       console.warn('VIEW BOOK', e.target.id);
       console.warn(e.target.id.split('--'));
     }

@@ -1,6 +1,7 @@
 import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 
+// prettier-ignore
 const viewBook = (obj) => {
   clearDom();
 
