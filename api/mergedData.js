@@ -1,5 +1,5 @@
 import { getSingleBook } from './bookData';
-import { getSingleAuthor } from './authorData';
+import { getAuthorBooks, getSingleAuthor } from './authorData';
 
 // prettier-ignore
 const getBookDetails = async (firebaseKey) => { // the async keyword let's JS know this is asynchronous function (promise)
@@ -9,4 +9,12 @@ const getBookDetails = async (firebaseKey) => { // the async keyword let's JS kn
   return { ...bookObject, authorObject };
 };
 
-export default getBookDetails;
+// prettier-ignore
+const getAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleAuthor(firebaseKey).then((authorObject) => {
+    getAuthorBooks(authorObject.firebaseKey)
+      .then((authorBookObject) => resolve({ ...authorObject, authorBookObject }));
+  }).catch(reject);
+});
+
+export { getBookDetails, getAuthorDetails };

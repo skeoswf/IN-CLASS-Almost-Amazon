@@ -9,7 +9,8 @@ import addBookForm from '../components/forms/addBookForm';
 import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import viewBook from '../pages/viewBook';
-import getBookDetails from '../api/mergedData';
+import viewAuthor from '../pages/viewAuthor';
+import { getAuthorDetails, getBookDetails } from '../api/mergedData';
 
 // prettier-ignore
 const domEvents = () => {
@@ -70,6 +71,11 @@ const domEvents = () => {
     if (e.target.id.includes('update-author')) {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleAuthor(firebaseKey).then((authorObj) => addAuthorForm(authorObj));
+    }
+
+    if (e.target.id.includes('view-author-btn')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      getAuthorDetails(firebaseKey).then(viewAuthor);
     }
   });
 };
