@@ -1,8 +1,4 @@
-import {
-  deleteSingleAuthor,
-  getAuthors,
-  getSingleAuthor,
-} from '../api/authorData';
+import { getAuthors, getSingleAuthor } from '../api/authorData';
 import { deleteBook, getBooks, getSingleBook } from '../api/bookData';
 import addAuthorForm from '../components/forms/addAuthorForm';
 import addBookForm from '../components/forms/addBookForm';
@@ -10,7 +6,11 @@ import { showAuthors } from '../pages/authors';
 import { showBooks } from '../pages/books';
 import viewBook from '../pages/viewBook';
 import viewAuthor from '../pages/viewAuthor';
-import { getAuthorDetails, getBookDetails } from '../api/mergedData';
+import {
+  getAuthorDetails,
+  getBookDetails,
+  deleteAuthorBooksRelationship,
+} from '../api/mergedData';
 
 // prettier-ignore
 const domEvents = () => {
@@ -56,7 +56,7 @@ const domEvents = () => {
         console.warn('CLICKED DELETE AUTHOR', e.target.id);
         const [, firebaseKey] = e.target.id.split('--');
 
-        deleteSingleAuthor(firebaseKey).then(() => {
+        deleteAuthorBooksRelationship(firebaseKey).then(() => {
           getAuthors().then(showAuthors);
         });
       }
